@@ -1,0 +1,6 @@
+{
+  "name": "Shortme URL Shortener",
+  "description": "A production-grade, micro-shortening service with custom slug control, click tracking analytics, and rate limiting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
