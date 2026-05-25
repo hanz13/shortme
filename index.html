@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Graceful safeguard for sandboxed iframe contexts and browser extensions/adblockers
+      // trying to inject or proxy the global fetch method when override options are locked.
+      (function() {
+        try {
+          var orig = window.fetch;
+          if (orig) {
+            var current = orig;
+            var desc = Object.getOwnPropertyDescriptor(window, 'fetch') || 
+                       Object.getOwnPropertyDescriptor(Object.getPrototypeOf(window), 'fetch') || {};
+            if (!desc.set) {
+              Object.defineProperty(window, 'fetch', {
+                get: function() { return current; },
+                set: function(val) { current = val; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          }
+        } catch (e) {
+          console.warn('Graceful fetch handler bypass disabled:', e);
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ShortMe - Professional-grade URL shortener with custom alias, high-speed redirection, QR code generation, global analytics, and deep link protection." />
+    <meta name="keywords" content="url shortener, link shortener, custom alias, qr code generator, professional redirect, shortme, short links" />
+    <meta name="author" content="ShortMe Team" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ShortMe - Your Solution URL Shortener" />
+    <meta property="og:description" content="Optimize, tracking, and protect your sharing with custom aliases, secure links, and instant high-resolution QR codes." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&auto=format&fit=crop&q=60" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="ShortMe - Your Solution URL Shortener" />
+    <meta property="twitter:description" content="Optimize, tracking, and protect your sharing with custom aliases, campaigns, and instant QR codes." />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'%3E%3C/path%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'%3E%3C/path%3E%3C/svg%3E" />
+    <title>ShortMe - Your Solution Url Shortener</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
